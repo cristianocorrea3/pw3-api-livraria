@@ -1,0 +1,26 @@
+{
+  "name": "api-livraria-aula",
+  "version": "1.0.0",
+  "description": "Api Rest desenvolvida na aula de PW3 referente a uma loja de digital de livros.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "PW3",
+    "ETEC",
+    "BARUERI",
+    "LIVRARIA",
+    "API-REST",
+    "E-COMMERCE"
+  ],
+  "author": "RENATO AUGUSTO GILIO DE SA",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.16.1"
+  }
+}

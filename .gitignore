@@ -1,3 +1,10 @@
+# Files
+package-lock.json
+# Images
+*.png
+*.jpg
+*.jpeg
+
 # Logs
 logs
 *.log
