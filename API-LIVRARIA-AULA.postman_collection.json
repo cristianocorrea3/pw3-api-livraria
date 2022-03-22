@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "c4291d46-b269-4aa1-a37f-ea0aae5e8e9e",
+		"name": "API-LIVRARIA-AULA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CATEGORIA",
+			"item": [
+				{
+					"name": "listarCategoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categoria/listarCategoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria",
+								"listarCategoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarCategoriaID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categoria/listarCategoria/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria",
+								"listarCategoria",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserirCategoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome_categoria\":\"NODEJS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria/cadastrarCategoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria",
+								"cadastrarCategoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterarCategoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"nome_categoria\":\"PROGRAMAÇÃO WEB 3\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria/alterarCategoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria",
+								"alterarCategoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluirCategoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria/excluirCategoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria",
+								"excluirCategoria"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LIVRO",
+			"item": [
+				{
+					"name": "cadastrarLivro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "titulo",
+									"value": "O Senhor dos Aneis",
+									"type": "text"
+								},
+								{
+									"key": "preco",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"/C:/Users/Aluno/Downloads/tartaruga.jpg",
+										"/C:/Users/Aluno/Downloads/pato.jpg"
+									]
+								},
+								{
+									"key": "detalhes",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sapien enim, rutrum eget laoreet eu, semper vitae eros. Etiam rhoncus massa dui, a ultricies tortor eleifend vitae. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Integer pretium est dolor, facilisis tincidunt odio fringilla eu. Suspendisse auctor iaculis ligula ac sodales. Etiam dignissim nunc vestibulum turpis porttitor convallis. Donec id felis nunc. Proin eget massa nisl. Vestibulum a tortor magna. Vivamus eget urna eget quam rhoncus elementum eget at magna. Cras porttitor in purus id dignissim. Cras dignissim ex massa, eget scelerisque augue cursus a. Aenean non libero vitae lectus luctus dignissim.",
+									"type": "text"
+								},
+								{
+									"key": "tblCategoriaumId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/livro/cadastrarLivro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"livro",
+								"cadastrarLivro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
