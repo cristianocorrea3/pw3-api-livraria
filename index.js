@@ -1,5 +1,5 @@
 /* Importação do pacote express */
-const express = require('express');;
+const express = require('express');
 
 /*Instancia executavel do express */
 const app = express();
