@@ -16,7 +16,7 @@ Métodos do verbo da rota:
 router.post(
     '/categoria/cadastrarCategoria',
     (req, res)=>{
-    
+       
         //let  nome_categoria  = req.body.nome_categoria;
         let { nome_categoria } = req.body;
 
@@ -39,11 +39,11 @@ router.get(
     (req, res)=>{
         //{order:['id', 'DESC']}
         categoria.findAll()
-                .then(
-                    (categorias)=>{
-                    res.send(categorias);
-                    }
-                );
+                 .then(
+                     (categorias)=>{
+                        res.send(categorias);
+                     }
+                 );
 
         //res.send('ROTA DE LISTAGEM GERAL DE CATEGORIA');
     }
@@ -56,11 +56,11 @@ router.get( '/categoria/listarCategoria/:id', (req, res)=>{
     // console.log("ID: " + id);
 
     categoria.findByPk(id)
-            .then(
-                (categoria)=>{
-                res.send(categoria);
-                }
-            );
+             .then(
+                 (categoria)=>{
+                    res.send(categoria);
+                 }
+             );
 
 });
 

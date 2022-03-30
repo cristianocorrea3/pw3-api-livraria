@@ -12,8 +12,8 @@ const Categoria = connection.define(
     'tbl_categoria',
     {
         nome_categoria:{
-            type: Sequelize.STRING,
-            allowNull: false
+           type: Sequelize.STRING,
+           allowNull: false
         }
     }
 );

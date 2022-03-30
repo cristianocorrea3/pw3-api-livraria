@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer');
+const fs = require('fs');
 
 const app = express();
 const router = express.Router();
@@ -49,7 +50,77 @@ router.post('/livro/cadastrarLivro', upload.array('files', 2) ,(req, res)=>{
     console.log(req.files[1]);
     console.log(req.body);
 
-    res.send('TESTE DE ROTA DE LIVRO');
+    const { titulo, preco, detalhes, tblCategoriaumId } = req.body;
+    const imagen_peq = req.files[0].path;
+    const imagen_grd = req.files[1].path;
+
+    livro.create(
+        {
+            titulo,
+            preco,
+            imagen_peq,
+            imagen_grd,
+            detalhes,
+            tblCategoriaumId
+
+        }
+    ).then(
+        ()=>{
+            res.send('DADOS DE LIVRO INSERIDOS COM SUCESSO!');      
+        }
+    );
+
+});
+
+router.get('/livro/listarLivro', (req, res)=>{
+
+    livro.findAll()
+          .then((livros)=>{
+              res.send(livros)
+          });
+});
+
+router.get('/livro/listarLivroCodigo/:id', (req, res)=>{
+
+    const { id } = req.params
+
+    livro.findByPk(id)
+          .then((livroId)=>{
+              res.send(livroId)
+          });
+});
+
+router.delete('/livro/excluirLivro/:id', (req, res)=>{
+
+    const { id } = req.params;
+
+    livro.findByPk(id)
+         .then((livro)=>{
+
+            const imagen_grd = livro.imagen_grd;
+            const imagen_peq = livro.imagen_peq;
+
+            fs.unlink(imagen_peq, (error)=>{
+
+                if(error){
+                    res.send('ERRO AO EXLCUIR A IMAGEM: ' + error);
+                }else{
+                    res.send('IMAGEM PEQUENA EXCLUIDA COM SUCESSO! ');
+                } 
+
+            });
+
+            fs.unlink(imagen_grd, (error)=>{
+
+                if(error){
+                    res.send('ERRO AO EXLCUIR A IMAGEM: ' + error);
+                }else{
+                    res.send('IMAGEM GRANDE EXCLUIDA COM SUCESSO! ');
+                } 
+
+            });
+
+         });
 
 });
 

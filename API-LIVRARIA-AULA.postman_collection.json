@@ -151,20 +151,20 @@
 							"formdata": [
 								{
 									"key": "titulo",
-									"value": "O Senhor dos Aneis",
+									"value": "Sapiens - Uma breve história da humanidade",
 									"type": "text"
 								},
 								{
 									"key": "preco",
-									"value": "80",
+									"value": "50",
 									"type": "text"
 								},
 								{
 									"key": "files",
 									"type": "file",
 									"src": [
-										"/C:/Users/Aluno/Downloads/tartaruga.jpg",
-										"/C:/Users/Aluno/Downloads/pato.jpg"
+										"/C:/Users/Aluno/Downloads/sheep-g272aad903_640.jpg",
+										"/C:/Users/Aluno/Downloads/dog-g287effcdf_640.jpg"
 									]
 								},
 								{
@@ -189,6 +189,68 @@
 							"path": [
 								"livro",
 								"cadastrarLivro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarLivro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/livro/listarLivro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"livro",
+								"listarLivro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarLivroCodigo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/livro/listarLivroCodigo/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"livro",
+								"listarLivroCodigo",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluirLivro",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/livro/excluirLivro/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"livro",
+								"excluirLivro",
+								"1"
 							]
 						}
 					},
