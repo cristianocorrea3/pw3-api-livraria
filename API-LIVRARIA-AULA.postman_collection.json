@@ -151,7 +151,7 @@
 							"formdata": [
 								{
 									"key": "titulo",
-									"value": "Sapiens - Uma breve história da humanidade",
+									"value": "O senhpr dos anéis",
 									"type": "text"
 								},
 								{
@@ -163,8 +163,8 @@
 									"key": "files",
 									"type": "file",
 									"src": [
-										"/C:/Users/Aluno/Downloads/sheep-g272aad903_640.jpg",
-										"/C:/Users/Aluno/Downloads/dog-g287effcdf_640.jpg"
+										"/C:/Users/Aluno/Desktop/plane-g705798269_640.jpg",
+										"/C:/Users/Aluno/Desktop/river-g1fa266fca_640.jpg"
 									]
 								},
 								{
@@ -189,6 +189,64 @@
 							"path": [
 								"livro",
 								"cadastrarLivro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editarLivro",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "titulo",
+									"value": "O Hobbit",
+									"type": "text"
+								},
+								{
+									"key": "preco",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"/C:/Users/Aluno/Desktop/plane-g705798269_640.jpg",
+										"/C:/Users/Aluno/Desktop/river-g1fa266fca_640.jpg"
+									]
+								},
+								{
+									"key": "detalhes",
+									"value": "Teste de edição de livro sem imagens 3.",
+									"type": "text"
+								},
+								{
+									"key": "tblCategoriaumId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/livro/editarLivro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"livro",
+								"editarLivro"
 							]
 						}
 					},
@@ -241,7 +299,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/livro/excluirLivro/1",
+							"raw": "http://localhost:3000/livro/excluirLivro/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -250,7 +308,7 @@
 							"path": [
 								"livro",
 								"excluirLivro",
-								"1"
+								"2"
 							]
 						}
 					},

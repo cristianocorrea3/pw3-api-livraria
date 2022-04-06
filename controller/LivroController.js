@@ -97,30 +97,118 @@ router.delete('/livro/excluirLivro/:id', (req, res)=>{
     livro.findByPk(id)
          .then((livro)=>{
 
-            const imagen_grd = livro.imagen_grd;
-            const imagen_peq = livro.imagen_peq;
+            let imagen_grd = livro.imagen_grd;
+            let imagen_peq = livro.imagen_peq;
 
-            fs.unlink(imagen_peq, (error)=>{
+            livro.destroy({
+                where:{id}
+            }).then(
+                ()=>{
 
-                if(error){
-                    res.send('ERRO AO EXLCUIR A IMAGEM: ' + error);
-                }else{
-                    res.send('IMAGEM PEQUENA EXCLUIDA COM SUCESSO! ');
-                } 
+                    /** EXCLUSÃO DA IMAGEM PEQUENA **/
+                    fs.unlink(imagen_peq, (error)=>{
 
-            });
+                        if(error){
+                            console.log('ERRO AO EXLCUIR A IMAGEM: ' + error);
+                        }else{
+                            console.log('IMAGEM PEQUENA EXCLUIDA COM SUCESSO! ');
+                        } 
+        
+                    });
 
-            fs.unlink(imagen_grd, (error)=>{
+                    /** EXCLUSÃO DA IMAGEM GRANDE **/
+                    fs.unlink(imagen_grd, (error)=>{
 
-                if(error){
-                    res.send('ERRO AO EXLCUIR A IMAGEM: ' + error);
-                }else{
-                    res.send('IMAGEM GRANDE EXCLUIDA COM SUCESSO! ');
-                } 
+                        if(error){
+                            console.log('ERRO AO EXLCUIR A IMAGEM: ' + error);
+                        }else{
+                            console.log('IMAGEM GRANDE EXCLUIDA COM SUCESSO! ');
+                        } 
+        
+                    });
 
-            });
+                    res.send('DADOS DE LIVRO EXCLUIDOS COM SUCESSO!');
+
+                }
+            );
 
          });
+
+});
+
+router.put('/livro/editarLivro', upload.array('files', 2), (req, res)=>{
+
+    const { titulo, preco, detalhes, tblCategoriaumId, id } = req.body;
+
+    /** UPDATE COM IMAGEM **/
+        if(req.files != ''){
+
+            livro.findByPk(id)
+            .then((livro)=>{
+
+                let imagen_grd = livro.imagen_grd;
+                let imagen_peq = livro.imagen_peq;
+
+                /** EXCLUSÃO DA IMAGEM PEQUENA **/
+                fs.unlink(imagen_peq, (error)=>{
+
+                    if(error){
+                        console.log('ERRO AO EXLCUIR A IMAGEM: ' + error);
+                    }else{
+                        console.log('IMAGEM PEQUENA EXCLUIDA COM SUCESSO! ');
+                    } 
+    
+                });
+
+                /** EXCLUSÃO DA IMAGEM GRANDE **/
+                fs.unlink(imagen_grd, (error)=>{
+
+                    if(error){
+                        console.log('ERRO AO EXLCUIR A IMAGEM: ' + error);
+                    }else{
+                        console.log('IMAGEM GRANDE EXCLUIDA COM SUCESSO! ');
+                    } 
+    
+                });
+
+                imagen_peq = req.files[0].path;
+                imagen_grd = req.files[1].path;
+
+                /** ATUALIZAÇÃO DOS DADOS DE LIVRO **/
+                livro.update(
+                    {titulo,
+                    imagen_peq,
+                    imagen_grd,
+                    preco,
+                    detalhes,
+                    tblCategoriaumId},
+                    {where: {id}}
+                ).then(
+                    ()=>{
+                        res.send('DADOS DE LIVRO ALTERADOS COM SUCESSO!');
+                    }
+                );
+
+
+
+            });
+
+        }else{
+
+            /** UPDATE SEM IMAGEM **/
+            livro.update(
+                {titulo,
+                preco,
+                detalhes,
+                tblCategoriaumId},
+                {where: {id}}
+            ).then(
+                ()=>{
+                    res.send('DADOS DE LIVRO ALTERADOS COM SUCESSO!');
+                }
+            );
+
+        }
 
 });
 
