@@ -75,9 +75,9 @@ router.post('/livro/cadastrarLivro', upload.array('files', 2) ,(req, res)=>{
 router.get('/livro/listarLivro', (req, res)=>{
 
     livro.findAll()
-          .then((livros)=>{
-              res.send(livros)
-          });
+        .then((livros)=>{
+            res.send(livros)
+        });
 });
 
 router.get('/livro/listarLivroCodigo/:id', (req, res)=>{
@@ -85,9 +85,9 @@ router.get('/livro/listarLivroCodigo/:id', (req, res)=>{
     const { id } = req.params
 
     livro.findByPk(id)
-          .then((livroId)=>{
-              res.send(livroId)
-          });
+        .then((livroId)=>{
+            res.send(livroId)
+        });
 });
 
 router.delete('/livro/excluirLivro/:id', (req, res)=>{
@@ -95,7 +95,7 @@ router.delete('/livro/excluirLivro/:id', (req, res)=>{
     const { id } = req.params;
 
     livro.findByPk(id)
-         .then((livro)=>{
+        .then((livro)=>{
 
             let imagen_grd = livro.imagen_grd;
             let imagen_peq = livro.imagen_peq;
@@ -132,7 +132,7 @@ router.delete('/livro/excluirLivro/:id', (req, res)=>{
                 }
             );
 
-         });
+        });
 
 });
 
@@ -188,8 +188,6 @@ router.put('/livro/editarLivro', upload.array('files', 2), (req, res)=>{
                         res.send('DADOS DE LIVRO ALTERADOS COM SUCESSO!');
                     }
                 );
-
-
 
             });
 
