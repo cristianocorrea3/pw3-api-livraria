@@ -27,6 +27,8 @@ A temática utilizada para as demonstrações de construção do front-end é de
 <a href="#">
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" width=100/>
 </a>
+
+
 ## Autores
 
 | [<img src="https://avatars.githubusercontent.com/u/66446324?v=4" width=115><br><sub>Cristiano Correa de Moraes</sub>](https://github.com/cristianocorrea3)
