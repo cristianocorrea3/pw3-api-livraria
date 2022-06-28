@@ -13,9 +13,7 @@ Métodos do verbo da rota:
 1º - A rota em si
 2º - A ação que a rota deve executar (arrow function)
 */
-router.post(
-    '/categoria/cadastrarCategoria',
-    (req, res)=>{
+router.post('/categoria/cadastrarCategoria', (req, res)=>{
 
         //let  nome_categoria  = req.body.nome_categoria;
         let { nome_categoria } = req.body;
@@ -34,9 +32,7 @@ router.post(
     }
 );
 /* ROTA DE LISTAGEM GERAL DE CATEGORIA (VERBO HTTP: GET)*/
-router.get(
-    '/categoria/listarCategoria',
-    (req, res)=>{
+router.get('/categoria/listarCategoria', (req, res)=>{
         //{order:['id', 'DESC']}
         categoria.findAll()
                 .then(
@@ -44,13 +40,12 @@ router.get(
                     res.send(categorias);
                     }
                 );
-
         //res.send('ROTA DE LISTAGEM GERAL DE CATEGORIA');
     }
 );
 
 /* ROTA DE LISTAGEM POR ID DE CATEGORIA (VERBO HTTP: GET)*/
-router.get( '/categoria/listarCategoria/:id', (req, res)=>{
+router.get('/categoria/listarCategoria/:id', (req, res)=>{
 
     let {id} = req.params;
     // console.log("ID: " + id);
@@ -61,13 +56,10 @@ router.get( '/categoria/listarCategoria/:id', (req, res)=>{
                 res.send(categoria);
                 }
             );
-
 });
 
 /* ROTA DE ALTERAÇÃO DE CATEGORIA (VERBO HTTP: PUT)*/
-router.put(
-    '/categoria/alterarCategoria',
-    (req, res)=>{
+router.put('/categoria/alterarCategoria', (req, res)=>{
 
         // console.log(req.body);
         let {id, nome_categoria} = req.body;
@@ -80,26 +72,20 @@ router.put(
                 res.send('DADOS DE CATEGORIA ALTERADOS COM SUCESSO!');
             }
         );
-
     }
 );
 /* ROTA DE EXCLUSÃO DE CATEGORIA (VERBO HTTP: DELETE)*/
-router.delete(
-    '/categoria/excluirCategoria/:id',
-    (req, res)=>{
+router.delete('/categoria/excluirCategoria/:id', (req, res)=>{
 
         let {id} = req.params;
 
         categoria.destroy(
             {where: {id}}
         ).then(
-
             ()=>{
                 res.send('CATEGORIA EXCLUÍDA COM SUCESSO!');
             }
-
         );
-
     }
 );
 

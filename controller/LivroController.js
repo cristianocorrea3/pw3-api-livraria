@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 const fileFilter = (req, file, cb)=>{
 
     if( file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg' ||  file.mimetype === 'image/png'){
-
+        
         cb(null, true);
 
     }else{
@@ -46,9 +46,10 @@ const upload = multer({
 
 router.post('/livro/cadastrarLivro', upload.array('files', 2) ,(req, res)=>{
 
-    console.log(req.files[0]);
-    console.log(req.files[1]);
-    console.log(req.body);
+    // console.log(req.files[0]);
+    // console.log(req.files[1]);
+    // console.log(req.body);
+    //res.send().status(200);
 
     const { titulo, preco, detalhes, tblCategoriaumId } = req.body;
     const imagen_peq = req.files[0].path;
@@ -95,6 +96,7 @@ router.delete('/livro/excluirLivro/:id', (req, res)=>{
     const { id } = req.params;
 
     livro.findByPk(id)
+
         .then((livro)=>{
 
             let imagen_grd = livro.imagen_grd;
@@ -113,7 +115,7 @@ router.delete('/livro/excluirLivro/:id', (req, res)=>{
                         }else{
                             console.log('IMAGEM PEQUENA EXCLUIDA COM SUCESSO! ');
                         } 
-        
+
                     });
 
                     /** EXCLUSÃO DA IMAGEM GRANDE **/
@@ -124,7 +126,7 @@ router.delete('/livro/excluirLivro/:id', (req, res)=>{
                         }else{
                             console.log('IMAGEM GRANDE EXCLUIDA COM SUCESSO! ');
                         } 
-        
+
                     });
 
                     res.send('DADOS DE LIVRO EXCLUIDOS COM SUCESSO!');
@@ -188,7 +190,7 @@ router.put('/livro/editarLivro', upload.array('files', 2), (req, res)=>{
                         res.send('DADOS DE LIVRO ALTERADOS COM SUCESSO!');
                     }
                 );
-
+                
             });
 
         }else{

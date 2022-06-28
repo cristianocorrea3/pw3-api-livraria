@@ -41,6 +41,6 @@ Categoria.hasMany(Livro);
 /*Implementação da  CHAVE PRIMÁRIA - LADO 1*/
 Livro.belongsTo(Categoria);
 
-// Livro.sync({force:true});
+//Livro.sync({force:true});
 
 module.exports = Livro;

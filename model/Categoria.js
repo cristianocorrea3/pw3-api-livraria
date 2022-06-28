@@ -12,13 +12,13 @@ const Categoria = connection.define(
     'tbl_categoria',
     {
         nome_categoria:{
-           type: Sequelize.STRING,
-           allowNull: false
+        type: Sequelize.STRING,
+        allowNull: false
         }
     }
 );
 
 /*Executar a criação da tabela no Banco de Dados*/
-// Categoria.sync({force:true});
+//Categoria.sync({force:true});
 
 module.exports = Categoria;
