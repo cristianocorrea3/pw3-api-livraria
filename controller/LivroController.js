@@ -25,7 +25,7 @@ router.post('/livro/cadastrarLivro', upload.array('files', 2) ,(req, res)=>{
         }
     ).then(
         ()=>{
-            return res.status(200).json({
+            return res.status(201).json({
                 erroStatus:false,
                 mensagemStatus:'Livro inserido com sucesso.'
             });      
