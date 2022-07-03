@@ -1,146 +1,126 @@
 {
 	"info": {
-		"_postman_id": "c4291d46-b269-4aa1-a37f-ea0aae5e8e9e",
-		"name": "API-LIVRARIA-AULA",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "92eb9d7e-3ae1-428d-95d0-d34f09f37468",
+		"name": "LIVRARIA-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9752073"
 	},
 	"item": [
 		{
-			"name": "CATEGORIA",
+			"name": "LIVRO",
 			"item": [
 				{
-					"name": "listarCategoria",
+					"name": "listarLivro",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/categoria/listarCategoria",
-							"protocol": "http",
+							"raw": "{{url_livraria_api}}/livro/listarLivro",
 							"host": [
-								"localhost"
+								"{{url_livraria_api}}"
 							],
-							"port": "3000",
 							"path": [
-								"categoria",
-								"listarCategoria"
+								"livro",
+								"listarLivro"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "listarCategoriaID",
+					"name": "listarLivroCodigo",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/categoria/listarCategoria/12",
-							"protocol": "http",
+							"raw": "{{url_livraria_api}}/livro/listarLivroCodigo/8",
 							"host": [
-								"localhost"
+								"{{url_livraria_api}}"
 							],
-							"port": "3000",
 							"path": [
-								"categoria",
-								"listarCategoria",
-								"12"
+								"livro",
+								"listarLivroCodigo",
+								"8"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "inserirCategoria",
+					"name": "excluirLivro",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome_categoria\":\"NODEJS\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:3000/categoria/cadastrarCategoria",
-							"protocol": "http",
+							"raw": "{{url_livraria_api}}/livro/excluirLivro/2",
 							"host": [
-								"localhost"
+								"{{url_livraria_api}}"
 							],
-							"port": "3000",
 							"path": [
-								"categoria",
-								"cadastrarCategoria"
+								"livro",
+								"excluirLivro",
+								"2"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "alterarCategoria",
+					"name": "alterarLivro",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"1\",\r\n    \"nome_categoria\":\"PROGRAMAÇÃO WEB 3\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "titulo",
+									"value": "TESTE DE ALTERAÇÃO - COM IMAGENS-",
+									"type": "text"
+								},
+								{
+									"key": "preco",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"/C:/Users/camil/Desktop/TRABALHO/ETEC/AULAS/PW3/PROJETOS TESTE/IMAGENS-TESTE/bird.jpg",
+										"/C:/Users/camil/Desktop/TRABALHO/ETEC/AULAS/PW3/PROJETOS TESTE/IMAGENS-TESTE/sea.jpg"
+									]
+								},
+								{
+									"key": "detalhes",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc imperdiet, mauris ut euismod ultricies, justo justo egestas odio, quis aliquet quam libero id urna. Aliquam erat volutpat. Proin tempus, mauris at mollis vestibulum, diam nulla condimentum nisi, eu cursus nisi lectus id ipsum. Integer vel rutrum purus. Morbi ac tristique nunc. Suspendisse id diam enim. Etiam nec nunc leo. Phasellus mollis lorem vel elementum accumsan. Vestibulum malesuada vitae mi sit amet eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+									"type": "text"
+								},
+								{
+									"key": "tblCategoriumId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "8",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/categoria/alterarCategoria",
-							"protocol": "http",
+							"raw": "{{url_livraria_api}}/livro/editarLivro",
 							"host": [
-								"localhost"
+								"{{url_livraria_api}}"
 							],
-							"port": "3000",
 							"path": [
-								"categoria",
-								"alterarCategoria"
+								"livro",
+								"editarLivro"
 							]
 						}
 					},
 					"response": []
 				},
-				{
-					"name": "excluirCategoria",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"4\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/categoria/excluirCategoria",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"categoria",
-								"excluirCategoria"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "LIVRO",
-			"item": [
 				{
 					"name": "cadastrarLivro",
 					"request": {
@@ -151,7 +131,7 @@
 							"formdata": [
 								{
 									"key": "titulo",
-									"value": "O senhpr dos anéis",
+									"value": "O senhor dos anéis",
 									"type": "text"
 								},
 								{
@@ -163,8 +143,8 @@
 									"key": "files",
 									"type": "file",
 									"src": [
-										"/C:/Users/Aluno/Desktop/plane-g705798269_640.jpg",
-										"/C:/Users/Aluno/Desktop/river-g1fa266fca_640.jpg"
+										"/C:/Users/camil/Desktop/TRABALHO/ETEC/AULAS/PW3/PROJETOS TESTE/IMAGENS-TESTE/montanha.jpg",
+										"/C:/Users/camil/Desktop/TRABALHO/ETEC/AULAS/PW3/PROJETOS TESTE/IMAGENS-TESTE/praia.jpg"
 									]
 								},
 								{
@@ -193,122 +173,117 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "CATEGORIA",
+			"item": [
+				{
+					"name": "listarCategoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_livraria_api}}/categoria/listarCategoria",
+							"host": [
+								"{{url_livraria_api}}"
+							],
+							"path": [
+								"categoria",
+								"listarCategoria"
+							]
+						}
+					},
+					"response": []
 				},
 				{
-					"name": "editarLivro",
+					"name": "listarCategoriaCodigo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_livraria_api}}/categoria/listarCategoria/6",
+							"host": [
+								"{{url_livraria_api}}"
+							],
+							"path": [
+								"categoria",
+								"listarCategoria",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastrarCategoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome_categoria\": \"---TESTE3---\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_livraria_api}}/categoria/cadastrarCategoria",
+							"host": [
+								"{{url_livraria_api}}"
+							],
+							"path": [
+								"categoria",
+								"cadastrarCategoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alterarCategoria",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "titulo",
-									"value": "O Hobbit",
-									"type": "text"
-								},
-								{
-									"key": "preco",
-									"value": "80",
-									"type": "text"
-								},
-								{
-									"key": "files",
-									"type": "file",
-									"src": [
-										"/C:/Users/Aluno/Desktop/plane-g705798269_640.jpg",
-										"/C:/Users/Aluno/Desktop/river-g1fa266fca_640.jpg"
-									]
-								},
-								{
-									"key": "detalhes",
-									"value": "Teste de edição de livro sem imagens 3.",
-									"type": "text"
-								},
-								{
-									"key": "tblCategoriaumId",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "id",
-									"value": "1",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"nome_categoria\": \"CLEAN ARCHITECTURE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/livro/editarLivro",
-							"protocol": "http",
+							"raw": "{{url_livraria_api}}/categoria/alterarCategoria",
 							"host": [
-								"localhost"
+								"{{url_livraria_api}}"
 							],
-							"port": "3000",
 							"path": [
-								"livro",
-								"editarLivro"
+								"categoria",
+								"alterarCategoria"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "listarLivro",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/livro/listarLivro",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"livro",
-								"listarLivro"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "listarLivroCodigo",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/livro/listarLivroCodigo/3",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"livro",
-								"listarLivroCodigo",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "excluirLivro",
+					"name": "excluirCategoria",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/livro/excluirLivro/2",
-							"protocol": "http",
+							"raw": "{{url_livraria_api}}/categoria/excluirCategoria/6",
 							"host": [
-								"localhost"
+								"{{url_livraria_api}}"
 							],
-							"port": "3000",
 							"path": [
-								"livro",
-								"excluirLivro",
-								"2"
+								"categoria",
+								"excluirCategoria",
+								"6"
 							]
 						}
 					},
