@@ -15,20 +15,23 @@ Métodos do verbo da rota:
 */
 router.post('/categoria/cadastrarCategoria', (req, res)=>{
 
-        //let  nome_categoria  = req.body.nome_categoria;
         let { nome_categoria } = req.body;
 
         categoria.create(
             {nome_categoria}
-            //{nome_categoria:nome_categoria}
         ).then(
             ()=>{
-                res.send('DADOS DE CATEGORIA INSERIDOS COM SUCESSO!');
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:'Categoria inserida com sucesso.'
+                });
             }
-        );
-        //console.log(nome_categoria);
-        //console.log(req.body);
-        //res.send('ROTA DE INSERÇÃO DE CATEGORIA');
+        ).catch((erro)=>{
+            return res.status(400).json({
+                erroStatus: true,
+                erroMensagem: erro
+            });
+        });
     }
 );
 /* ROTA DE LISTAGEM GERAL DE CATEGORIA (VERBO HTTP: GET)*/
@@ -37,9 +40,14 @@ router.get('/categoria/listarCategoria', (req, res)=>{
         categoria.findAll()
                 .then(
                     (categorias)=>{
-                    res.send(categorias);
+                        return res.status(200).json(categorias);
                     }
-                );
+                ).catch((erro)=>{
+                    return res.status(400).json({
+                        erroStatus: true,
+                        erroMensagem: erro
+                    });
+                });
         //res.send('ROTA DE LISTAGEM GERAL DE CATEGORIA');
     }
 );
@@ -53,9 +61,14 @@ router.get('/categoria/listarCategoria/:id', (req, res)=>{
     categoria.findByPk(id)
             .then(
                 (categoria)=>{
-                res.send(categoria);
+                    return res.status(200).send(categoria);
                 }
-            );
+            ).catch((erro)=>{
+                return res.status(400).json({
+                    erroStatus: true,
+                    erroMensagem: erro
+                });
+            });
 });
 
 /* ROTA DE ALTERAÇÃO DE CATEGORIA (VERBO HTTP: PUT)*/
@@ -69,9 +82,17 @@ router.put('/categoria/alterarCategoria', (req, res)=>{
                 {where: {id}}
         ).then(
             ()=>{
-                res.send('DADOS DE CATEGORIA ALTERADOS COM SUCESSO!');
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:'Categoria alterada com sucesso.'
+                });
             }
-        );
+        ).catch((erro)=>{
+            return res.status(400).json({
+                erroStatus: true,
+                erroMensagem: erro
+            });
+        });
     }
 );
 /* ROTA DE EXCLUSÃO DE CATEGORIA (VERBO HTTP: DELETE)*/
@@ -83,9 +104,16 @@ router.delete('/categoria/excluirCategoria/:id', (req, res)=>{
             {where: {id}}
         ).then(
             ()=>{
-                res.send('CATEGORIA EXCLUÍDA COM SUCESSO!');
-            }
-        );
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:'Categoria alterada com sucesso.'
+                });
+            }).catch((erro)=>{
+            return res.status(400).json({
+                erroStatus: true,
+                erroMensagem: erro
+            });
+        });
     }
 );
 
