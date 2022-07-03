@@ -48,7 +48,6 @@ router.get('/categoria/listarCategoria', (req, res)=>{
                         erroMensagem: erro
                     });
                 });
-        //res.send('ROTA DE LISTAGEM GERAL DE CATEGORIA');
     }
 );
 
@@ -106,7 +105,7 @@ router.delete('/categoria/excluirCategoria/:id', (req, res)=>{
             ()=>{
                 return res.status(200).json({
                     erroStatus:false,
-                    mensagemStatus:'Categoria alterada com sucesso.'
+                    mensagemStatus:'Categoria excluída com sucesso.'
                 });
             }).catch((erro)=>{
             return res.status(400).json({

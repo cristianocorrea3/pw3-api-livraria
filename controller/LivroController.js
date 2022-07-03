@@ -1,55 +1,13 @@
 const express = require('express');
-const multer = require('multer');
-const fs = require('fs');
 
 const app = express();
 const router = express.Router();
 
+const upload = require('../helpers/upload/uploadImagem');
+const deleteImage = require('../helpers/upload/deleteImagem');
 const livro = require('../model/Livro');
 
-/***** MULTER - STORAGE *****/
-/** GERENCIA O ARMAZENAMENTO DOS ARQUIVOS **/
-const storage = multer.diskStorage({
-    destination: (req, file, cb)=>{
-        cb(null, './uploads/');
-    },
-    filename: (req, file, cb)=>{
-        cb(null, Date.now().toString() + '_'+ file.originalname);
-    }
-});
-
-/***** MULTER - FILTER *****/
-/** GERENCIA O TIPO DE ARQUIVO QUE PODE SER RECEBIDO **/
-const fileFilter = (req, file, cb)=>{
-
-    if( file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg' ||  file.mimetype === 'image/png'){
-        
-        cb(null, true);
-
-    }else{
-
-        cb(null, false);
-
-    }
-
-}
-
-/***** MULTER - UPLOAD *****/
-/** EXECUTA O PROCESSO DE ARMAZENAMENTO **/
-const upload = multer({
-    storage: storage,
-    limits:{ 
-        fieldSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter
-});
-
 router.post('/livro/cadastrarLivro', upload.array('files', 2) ,(req, res)=>{
-
-    // console.log(req.files[0]);
-    // console.log(req.files[1]);
-    // console.log(req.body);
-    //res.send().status(200);
 
     const { titulo, preco, detalhes, tblCategoriaumId } = req.body;
     const imagen_peq = req.files[0].path;
@@ -67,9 +25,17 @@ router.post('/livro/cadastrarLivro', upload.array('files', 2) ,(req, res)=>{
         }
     ).then(
         ()=>{
-            res.send('DADOS DE LIVRO INSERIDOS COM SUCESSO!');      
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:'Livro inserido com sucesso.'
+            });      
         }
-    );
+    ).catch((erro)=>{
+        return res.status(400).json({
+            erroStatus: true,
+            erroMensagem: erro
+        });
+    });
 
 });
 
@@ -77,7 +43,12 @@ router.get('/livro/listarLivro', (req, res)=>{
 
     livro.findAll()
         .then((livros)=>{
-            res.send(livros)
+            return res.status(200).json(livros)
+        }).catch((erro)=>{
+            return res.status(400).json({
+                erroStatus: true,
+                erroMensagem: erro
+            });
         });
 });
 
@@ -86,8 +57,13 @@ router.get('/livro/listarLivroCodigo/:id', (req, res)=>{
     const { id } = req.params
 
     livro.findByPk(id)
-        .then((livroId)=>{
-            res.send(livroId)
+        .then((livro)=>{
+            return res.status(200).json(livro)
+        }).catch((erro)=>{
+            return res.status(400).json({
+                erroStatus: true,
+                erroMensagem: erro
+            });
         });
 });
 
@@ -99,40 +75,27 @@ router.delete('/livro/excluirLivro/:id', (req, res)=>{
 
         .then((livro)=>{
 
-            let imagen_grd = livro.imagen_grd;
-            let imagen_peq = livro.imagen_peq;
+            let imagem_grd = livro.imagen_grd;
+            let imagem_peq = livro.imagen_peq;
 
             livro.destroy({
                 where:{id}
             }).then(
                 ()=>{
+                    deleteImage(imagem_peq);
+                    deleteImage(imagem_grd);
 
-                    /** EXCLUSÃO DA IMAGEM PEQUENA **/
-                    fs.unlink(imagen_peq, (error)=>{
-
-                        if(error){
-                            console.log('ERRO AO EXLCUIR A IMAGEM: ' + error);
-                        }else{
-                            console.log('IMAGEM PEQUENA EXCLUIDA COM SUCESSO! ');
-                        } 
-
+                    return res.status(200).json({
+                        erroStatus:false,
+                        mensagemStatus:'Livro excluído com sucesso.'
                     });
 
-                    /** EXCLUSÃO DA IMAGEM GRANDE **/
-                    fs.unlink(imagen_grd, (error)=>{
-
-                        if(error){
-                            console.log('ERRO AO EXLCUIR A IMAGEM: ' + error);
-                        }else{
-                            console.log('IMAGEM GRANDE EXCLUIDA COM SUCESSO! ');
-                        } 
-
+                }).catch((erro)=>{
+                    return res.status(400).json({
+                        erroStatus: true,
+                        erroMensagem: erro
                     });
-
-                    res.send('DADOS DE LIVRO EXCLUIDOS COM SUCESSO!');
-
-                }
-            );
+                });
 
         });
 
@@ -142,39 +105,19 @@ router.put('/livro/editarLivro', upload.array('files', 2), (req, res)=>{
 
     const { titulo, preco, detalhes, tblCategoriaumId, id } = req.body;
 
-    /** UPDATE COM IMAGEM **/
+        /** UPDATE COM IMAGEM **/
         if(req.files != ''){
-
             livro.findByPk(id)
             .then((livro)=>{
 
-                let imagen_grd = livro.imagen_grd;
-                let imagen_peq = livro.imagen_peq;
+                let imagem_grd_old = livro.imagen_grd;
+                let imagem_peq_old = livro.imagen_peq;
 
-                /** EXCLUSÃO DA IMAGEM PEQUENA **/
-                fs.unlink(imagen_peq, (error)=>{
+                deleteImage(imagem_peq_old);
+                deleteImage(imagem_grd_old);
 
-                    if(error){
-                        console.log('ERRO AO EXLCUIR A IMAGEM: ' + error);
-                    }else{
-                        console.log('IMAGEM PEQUENA EXCLUIDA COM SUCESSO! ');
-                    } 
-    
-                });
-
-                /** EXCLUSÃO DA IMAGEM GRANDE **/
-                fs.unlink(imagen_grd, (error)=>{
-
-                    if(error){
-                        console.log('ERRO AO EXLCUIR A IMAGEM: ' + error);
-                    }else{
-                        console.log('IMAGEM GRANDE EXCLUIDA COM SUCESSO! ');
-                    } 
-    
-                });
-
-                imagen_peq = req.files[0].path;
-                imagen_grd = req.files[1].path;
+                let imagen_peq = req.files[0].path;
+                let imagen_grd = req.files[1].path;
 
                 /** ATUALIZAÇÃO DOS DADOS DE LIVRO **/
                 livro.update(
@@ -187,10 +130,16 @@ router.put('/livro/editarLivro', upload.array('files', 2), (req, res)=>{
                     {where: {id}}
                 ).then(
                     ()=>{
-                        res.send('DADOS DE LIVRO ALTERADOS COM SUCESSO!');
-                    }
-                );
-                
+                        return res.status(200).json({
+                            erroStatus:false,
+                            mensagemStatus:'Livro alterado com sucesso.'
+                        });
+                    }).catch((erro)=>{
+                        return res.status(400).json({
+                            erroStatus: true,
+                            erroMensagem: erro
+                        });
+                    });
             });
 
         }else{
@@ -204,10 +153,16 @@ router.put('/livro/editarLivro', upload.array('files', 2), (req, res)=>{
                 {where: {id}}
             ).then(
                 ()=>{
-                    res.send('DADOS DE LIVRO ALTERADOS COM SUCESSO!');
-                }
-            );
-
+                    return res.status(200).json({
+                        erroStatus:false,
+                        mensagemStatus:'Livro alterado com sucesso.'
+                    });
+                }).catch((erro)=>{
+                    return res.status(400).json({
+                        erroStatus: true,
+                        erroMensagem: erro
+                    });
+                });
         }
 
 });
