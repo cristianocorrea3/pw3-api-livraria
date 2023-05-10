@@ -4,7 +4,6 @@
   "description": "Api Rest desenvolvida na aula de PW3 referente a uma loja de digital de livros.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
   "keywords": [
@@ -15,7 +14,7 @@
     "API-REST",
     "E-COMMERCE"
   ],
-  "author": "RENATO AUGUSTO GILIO DE SA",
+  "author": "CRISTIANO CORREA DE MORAES",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
